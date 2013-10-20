@@ -4,6 +4,8 @@ require 'json'
 require_relative 'Extern.rb'
 
 class Scrapper
+	attr_accessor :scrap_result
+
 	def initialize
 		@mechanize = Mechanize.new
 		@scrap_result = Hash.new
@@ -16,7 +18,7 @@ class Scrapper
 		@last_access = nil
 	end
 
-	def login _site
+	def login_to _site
 		case _site
 		when :gw2
 			@mechanize.get @@gw2_login_page do |page|
@@ -27,7 +29,6 @@ class Scrapper
 
 				break
 			end
-		when :gw2db
 		end
 
 		@last_access = _site
@@ -36,14 +37,14 @@ class Scrapper
 	end
 
 	def scrap_data _site = @last_access
-		case _site
+		case @last_access
 		when :gw2
 			@mechanize.get @@gw2_authentication_page
 			@scrap_result[_site] = JSON.parse(
 				@mechanize.get(@@gw2_search_string).body)
 		when :gw2db
 			@scrap_result[_site] = JSON.parse(
-				@mechanize.get(@extern.get :gw2db_api).body)
+				@mechanize.get(@extern.get _site).body)
 		end
 	end
 end
