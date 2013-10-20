@@ -7,9 +7,10 @@ class RecipeBuilder
 		_i.each do |data|
 			@items[data['ID']] = {
 				name: 				data['Name'],
-				item_type:			enumerate_type(data),
+				item_type_id:		enumerate_type(data),
 				rarity: 			data['Rarity'],
 				description: 		data['Description'],
+				tp_id: 				data['DataID'],
 			}
 		end
 

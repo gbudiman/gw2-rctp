@@ -41,7 +41,7 @@ class Scrapper
 		when :gw2
 			@mechanize.get @@gw2_authentication_page
 			@scrap_result[_site] = JSON.parse(
-				@mechanize.get(@@gw2_search_string).body)
+				@mechanize.get(@@gw2_search_string).body)['results']
 		when :gw2db
 			@scrap_result[_site] = JSON.parse(
 				@mechanize.get(@extern.get _site).body)
