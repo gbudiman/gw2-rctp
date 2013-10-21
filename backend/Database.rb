@@ -188,7 +188,7 @@ class Database
 									(SELECT MAX(time) from markets)
 						LEFT OUTER JOIN markets AS recipe_market
 							ON recipe_market.item_id = recipes.recipe_item_id
-								AND final_market.time =
+								AND recipe_market.time =
 									(SELECT MAX(time) from markets)
 					) AS crafting_tree
 					INNER JOIN items AS target_item

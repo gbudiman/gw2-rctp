@@ -10,6 +10,7 @@ opts = Trollop::options do
 	opt :truncate_items, 'Truncate item data'
 	opt :truncate_markets, 'Truncate market data'
 	opt :truncate_recipes, 'Truncate recipe data'
+	opt :update_crafting_profits, 'Update crafting profits', short: 'p'
 end
 
 scrapper = Scrapper.new
@@ -18,6 +19,7 @@ database = Database.new
 database.truncate :items if opts[:truncate_items]
 database.truncate :markets if opts[:truncate_markets]
 database.truncate :recipes if opts[:truncate_recipes]
+database.update_rows(:crafting_profits) if opts[:update_crafting_profits]
 
 if opts[:scrap_market]
 	market = MarketSentinel.new(
