@@ -1,0 +1,12 @@
+%table
+	- @list.each do |e|
+		%tr
+			%td= e[:id]
+			%td= e[:name]
+			%td= e[:crafting_cost]
+			%td= e[:sell_price]
+			%td= e[:crafting_profit_on_sell]
+			%td= e[:sell_count]
+			%td= e[:buy_price]
+			%td= e[:crafting_profit_on_buy]
+			%td= e[:buy_count]
