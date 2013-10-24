@@ -14,3 +14,8 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+//= require twitter/typeahead.min
+
+$(document).ready(function() {
+	$('input[name="search"]').typeahead( {name: 'planets', prefetch: '/item_buffers' });
+});

@@ -5,12 +5,14 @@ require_relative 'RecipeBuilder.rb'
 require_relative 'Scrapper.rb'
 
 opts = Trollop::options do
+	opt :prefill_enumerations, 'Prefill enumerations', short: 'e'
 	opt :scrap_market, 'Scrap market data', short: 'm'
 	opt :scrap_recipe, 'Scrap recipe data', short: 'r'
 	opt :truncate_items, 'Truncate item data'
 	opt :truncate_markets, 'Truncate market data'
 	opt :truncate_recipes, 'Truncate recipe data'
 	opt :update_crafting_profits, 'Update crafting profits', short: 'p'
+	opt :update_item_buffers, 'Update item buffers', short: 'i'
 end
 
 scrapper = Scrapper.new
@@ -38,3 +40,6 @@ if opts[:scrap_recipe]
 	database.update_rows(:items, recipe.items)
 	database.update_rows(:recipes, recipe.recipes)
 end
+
+database.prefill_table if opts[:prefill_enumerations]
+database.update_rows :item_buffers if opts[:update_item_buffers]

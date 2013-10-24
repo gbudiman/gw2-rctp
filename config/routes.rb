@@ -3,6 +3,9 @@ Gw2Rctp::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   root to: 'crafting_profits#list'
+  get '/search', to: 'recipes#search'
+  get '/item_buffers', to: 'item_buffers#list_item_names'
+
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
